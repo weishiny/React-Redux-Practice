@@ -1,3 +1,8 @@
+## Project for practicing React and Redux
+- [X] React basic jsx syntax
+- [X] Redux basic flow
+- [ ] Combine React UI and Redux basic flow
+
 ## Usage
 
 - Install browser extension first. [LiveReload Official Website](http://livereload.com/)
