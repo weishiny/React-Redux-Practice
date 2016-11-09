@@ -4,7 +4,7 @@ import { todoApp } from '../reducers/reducers';
 import { addTodo, toggleTodo, setVisibilityFilter, VisibilityFilters } from '../actions/actions';
 
 let store = createStore(todoApp);
-
+/* For debug
 //log the initial state
 console.log(store.getState());
 
@@ -26,5 +26,5 @@ store.dispatch(setVisibilityFilter(VisibilityFilters.SHOW_COMPLETED));
 
 //stop listening to state updates
 unsubscribe();
-
+*/
 export default store;

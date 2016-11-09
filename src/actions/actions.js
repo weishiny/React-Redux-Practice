@@ -21,9 +21,9 @@ export const VisibilityFilters = {
 /**
  * action creators
  */
-
-export function addTodo(text) {
-    return { type: ADD_TODO, text}
+let nextTodoID = 0;
+export function addTodo(text) {    
+    return { type: ADD_TODO, id: nextTodoID++, text}
 }
 
 export function toggleTodo(index) {
