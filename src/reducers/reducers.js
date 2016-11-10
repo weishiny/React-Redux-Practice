@@ -16,10 +16,34 @@ function VisibilityFilter(state = SHOW_ALL, action) {
     }
 }
 
+//we use ES6 Spread Operator (...) so that we can expand each element inside array.
+//ex: 
+//let cold = ['autumn', 'winter'];  
+//let warm = ['spring', 'summer'];  
+//construct an array
+//[...cold, ...warm] // => ['autumn', 'winter', 'spring', 'summer']
+
+//ex:
+//function myFunction(x, y, z) { }
+//var args = [0, 1, 2];
+//myFunction(...args);
+
+//z will receive number 3 rather than array whose value is 3
+//function myFunction(v, w, x, y, z) { }
+//var args = [0, 1];
+//myFunction(-1, ...args, 2, ...[3]);
+
+//if you don't use spread syntax, this array will become a two-dimension array'
+//var arr1 = [0, 1, 2];
+//var arr2 = [3, 4, 5];
+//arr1.push(...arr2); 
+
 function todos(state = [], action) {
     switch (action.type) {
         case ADD_TODO:
             return [
+                //Array which contains multiple object will be expanded to each object. 
+                //Otherwise it will return a 2-dimension array
                 ...state,
                 {
                     id: action.id,
