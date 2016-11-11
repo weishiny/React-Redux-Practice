@@ -79,11 +79,16 @@ export function fetchPosts(subreddit) {
         // This is not required by thunk middleware, but it is convenient for us.
         return fetch(`http://www.reddit.com/r/${subreddit}.json`)
             .then(response => response.json())
-            .then(json =>
+            .then(json => {
                 // We can dispatch many times!
                 // Here, we update the app state with the results of the API call.
-                dispatch(receivePosts(subreddit, json))
-            );
+                console.log('***Get Api Data Success-Action***');
+                console.log(json);
+                dispatch(receivePosts(subreddit, json));
+            }).catch(error =>{
+                console.log('***Get Api Data Error***');
+                console.log(error);
+            });
 
         // In a real world app, you also want to
         // catch any error in the network call.
