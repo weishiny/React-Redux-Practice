@@ -62,7 +62,7 @@ export function receivePosts(subreddit, json) {
 //use it just like any other action creator: store.dispatch(fetchPosts('reactjs'))
 //by using this specific middleware, an action creator can return a function instead of 
 //an action object.This way, the action creator becomes a thunk.
-export function fetchPosts(subreddit) { 
+function fetchPosts(subreddit) { 
     // Thunk middleware knows how to handle functions.
     // It passes the dispatch method as an argument to the function,
     // thus making it able to dispatch actions itself.
@@ -92,5 +92,28 @@ export function fetchPosts(subreddit) {
 
         // In a real world app, you also want to
         // catch any error in the network call.
+    }
+}
+
+function shouldFetchPosts(state, subreddit) {
+    const posts = state.postsBySubreddit[subreddit];
+    if (!posts) {
+        return true;
+    } else if (posts.isFetching) { 
+        return false;
+    } else {
+        return posts.didInvalidate;
+    }
+}
+
+export function fetchPostsIfNeeded(subreddit) { 
+    return (dispatch, getState) => {
+        if (shouldFetchPosts(getState(), subreddit)) { 
+            //Dispatch a thunk from thunk
+            return dispatch(fetchPosts(subreddit));
+        } else {
+            //Let the calling code know there's nothing to waiting for
+            return Promise.resolve();
+        }
     }
 }

@@ -1,7 +1,7 @@
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { createStore, applyMiddleware } from 'redux';
-import { selectSubreddit, fetchPosts } from '../actions/AdvancedActions';
+import { selectSubreddit, fetchPostsIfNeeded } from '../actions/AdvancedActions';
 import rootReducer from '../reducers/AdvancedReducers';
 
 const loggerMiddleware = createLogger();
@@ -26,7 +26,7 @@ let unsubscribe = AdvancedStore.subscribe(() => {
 
 //dispatch some actions
 AdvancedStore.dispatch(selectSubreddit('reactjs'));
-AdvancedStore.dispatch(fetchPosts('reactjs')).then(() => {
+AdvancedStore.dispatch(fetchPostsIfNeeded('reactjs')).then(() => {
     console.log('***Get Api Data Success-Store***');
     console.log(AdvancedStore.getState())
 });
